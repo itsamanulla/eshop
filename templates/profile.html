@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<body>
+ <!-- Login Start -->
+        <div class="register">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">    
+                        <div class="register-form">
+                            <div class="row">
+                               <style >
+                                   .errorlist{
+                                    list-style-type: none;
+                                    color: blue;
+                                    font-size: 10px
+                                    margin: 0px;
+                                    padding: 0px;
+                                   }
+                                   .l{
+                                    color: red;
+                                     margin: 0px;
+                                    padding: 0px;
+                                   }
+                               </style>
+                               <div class="col-sm-12"><span class="l"><h3>Details</h3></span>
+                                <form action="" method="POST">
+                                  {% csrf_token %}
+                                  {{form.non_field_errors}}
+                                   <div> <span class="errorlist">{{form.mobile.errors}}</span><span class="l">{{form.mobile.label}} {{form.mobile}}</span></div>
+                                   
+                                   <div> <span class="l">{{form.address_1.label}} {{form.address_1}}</span><span class="errorlist">{{form.address_1.errors}}</span></div>
+                                   <div> <span class="l">{{form.address_2.label}} {{form.address_2}}</span><span class="errorlist">{{form.address_2.errors}}</span></div>
+                                   
+                                   <div> <span class="l">{{form.state.label}} {{form.state}}</span><span class="errorlist">{{form.state.errors}}</span></div>
+                                   
+                                   <div> <span class="l">{{form.city.label}} {{form.city}}</span><span class="errorlist">{{form.city.errors}}</span></div>
+                                  
+                                  
+                                  <div> <span class="l">{{form.pincode.label}} {{form.pincode}}</span><span class="errorlist">{{form.pincode.errors}}</span></div>
+                                  
+                                 
+                                  
+                                <div class="form-group">
+                                   <input type="submit" value="Submit" class="btn float-left login_btn">
+                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+</body>
+
+
+{% endblock %}
+        
+       
+        
+

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<div class="center">
+{%if not payment%}
+<form class="text-center border border-light p-5" action="" method="POST">
+
+{% csrf_token %}
+
+    <p class="h3 mb-3">
+    <i class="fas fa-shopping-cart"></i> SHOPME
+    </p>
+
+    <p class="mb-3">
+    Complete your payment with Razorpay
+    </p>
+
+<input type="name" name="name" id="name" required class="form-control mb-4" placeholder="Name">
+<div class="col-md-12">
+    <input type="submit" value="Submit" class="btn float-left login_btn">
+</div>
+</form>
+<!-- RAZORPAY INTEGRATION HERE -->
+{%endif%}
+{% if payment %}
+ <p class="h3 mb-3">
+    <i class="fas fa-shopping-cart"></i> SHOPME
+    </p>
+
+    <p class="mb-3">
+    Complete your payment with Razorpay
+    </p>
+<form action="/success/" method="POST">
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="rzp_test_OOdnA7baC4aYyS"
+        data-amount={{payment.amount}}
+        data-currency={{payment.currency}}
+        data-order_id={{payment.id}}
+        data-buttontext="Pay with Razorpay"
+        data-name="ILoveDjango3000"
+        data-description=""
+        data-image=""
+        data-prefill.name={{request.user.username}}
+        data-prefill.email={{request.user.email}}
+        data-theme.color="#F37254"
+    ></script>
+    <input type="hidden" custom="Hidden Element" name="hidden">
+    </form>
+{% endif %}
+</div>
+</div> 
+{% endblock %}

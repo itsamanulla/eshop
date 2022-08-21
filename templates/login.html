@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<body>
+<div class="register">
+    <div class="container-fluid">
+        <div class="row">
+             <div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">
+                 <div class="login-form">
+                     <div class="row">
+                         <style>
+                             
+                             .label{
+                                color: red;
+                                
+                             }
+                         </style>
+                         <div class="col-sm-10 mx-3"><span class="label"><h3>Login</h3></span></div>
+                         <div class="col-sm-12">
+                         <form action="{%url 'login'%}" method="POST">
+                             {% csrf_token %} 
+                             
+                             <span class="label mx-3">{{error}}</span>
+                             
+                             {% for field in fm %}
+                               <div class="col-md-12">
+                                   <span class="label">{{field.label_tag}} </span> {{field}}
+                               </div>
+                             {% endfor %}
+                             
+                            
+                            
+                         <div class="col-md-12">
+                             <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="newaccount">
+                                 <label class="custom-control-label" for="newaccount"><span class="label">Keep me signed in</span></label><br><a href="{%url 'reset_password'%}">Forgot Password? </a>
+                             </div>
+                         </div>
+                         <div class="col-md-12">
+                            <input type="submit" value="Login" class="btn float-left login_btn">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+          </div>
+    </div>
+</div>
+<br>              
+</body>
+
+{% endblock%}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Enter new password{% endblock %}
+
+{% block content %}
+
+{% if validlink %}
+<div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">
+<div class="row" style="padding: 50px;">
+<h2>Set a new password!</h2>
+<style>
+.label{
+  color: red;
+  margin: 0px;
+  padding:0px;
+   
+
+</style>
+<form method="POST">
+  {% csrf_token %}
+  <div class="label">{%for fm in form%}
+  {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+  {%endfor%}</div>
+  <br>
+  <input type="submit" class="btn float-left login_btn" value="Change my password">
+</form>
+</div>
+</div>}
+{% else %}
+<div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">
+<div class="row" style="padding: 40px;">
+<p>The password reset link was invalid, possibly because it has already been used.  Please request a new password reset.</p>
+</div>
+</div>
+{% endif %}
+{% endblock %}

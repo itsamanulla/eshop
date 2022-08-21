@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<!-- Checkout Start -->
+        <div class="checkout">
+            <div class="container-fluid"> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="checkout-inner">
+                            
+
+                            <div class="table-responsive">
+                                
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            
+                                            <th>Total</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        {%for carts in cart%}
+
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    
+                                                    <p>{{carts.product.name}}</p>
+                                                </div>
+                                            </td>
+                                            <td>₹{{carts.product.price}}</td>
+                                            
+                                            <td>₹{{carts.total_cost}}</td>
+                                            
+                                        </tr>
+
+                                        {%endfor%}
+
+                                    </tbody>
+
+                                </table>
+                                <br>
+                                <form action="{%url 'checkout'%}" method="POST">
+                                    {% csrf_token %}
+                                    {{error}}
+                                {%if b%}
+                                {%for ad in b%}
+                                        
+                                <p><h3>Address</h3></p>
+                                  <input type="radio" id="{{ad.id}}" name="address" value="{{ad.id}}">
+                                  <label for="address"><h5>{{ad.address.label_tag.as_table}} {{ad.address}}</h5></label>
+
+                                  
+                                  <br>
+
+                                {%endfor%}
+                                <br>
+                                <div class="form-group">
+                                   <input type="submit" value="Submit" class="btn float-left login_btn">
+                                </div>
+                                {%else%}
+                                <h3>Address:</h3>
+                                <h5>{{add.address}}</h5>
+                                {%endif%}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Cart Total</h1>
+                                
+                                <p class="sub-total">Sub Total<span>₹{{total}}</span></p>
+                                <p class="ship-cost">Shipping Cost<span>₹{{s}}</span></p>
+                                <h2>Grand Total<span>₹{{f}}</span></h2>
+                            </div>
+
+                            <div class="checkout-payment">
+                                <div class="payment-methods">
+                                    <h1>Payment Methods</h1>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-1" name="payment">
+                                            <label class="custom-control-label" for="payment-1">Paypal</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-1-show">
+                                            <div class="checkout-btn">
+                                                {%if b%}
+                                                <button>Place Order</button>
+                                                {%else%}
+                                                <a href="{%url 'pay' f%}"><button>Place Order</button></a>
+                                                {%endif%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-5" name="payment">
+                                            <label class="custom-control-label" for="payment-5">Cash on Delivery{{f}}</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-5-show">
+                                            <div class="checkout-btn">
+                                                {%if b%}
+                                                <button>Place Order</button>
+                                                {%else%}
+                                                <a href="{%url 'pay' f%}"><button>Place Order</button></a>
+                                                {%endif%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Checkout End -->
+</body>
+{% endblock %}
+        
+        
+        
+        
+

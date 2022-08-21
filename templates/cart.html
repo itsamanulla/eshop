@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<!-- Cart Start -->
+        {%if user.is_authenticated%}
+        <div class="cart-page">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="cart-page-inner">
+                            <div class="table-responsive">
+                                {%if cart%}
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        {%for carts in cart%}
+
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="{%url 'detail' carts.product.id%}"><img src="{{carts.product.image.url}}" alt="Image"></a>
+                                                    <p>{{carts.product.name}}</p>
+                                                </div>
+                                            </td>
+                                            <td>₹{{carts.product.price}}</td>
+                                            <td>
+                                                <div class="inline-block" >
+                                                    <a class="btn" href="{%url 'minus' carts.id%}"><i class="fa fa-minus"></i></a>
+                                                    {{carts.quantity}}
+                                                    <a class="btn" href="{%url 'plus' carts.id%}"><i class="fa fa-plus"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>₹{{carts.total}}</td>
+                                            <td><a class="btn" href="{%url 'remove' carts.id %}"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                                {%else%}
+                                <style >h2 {text-align: center;}</style>
+                                <h2>Cart is empty</h2>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cart-page-inner">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="coupon">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <button>Apply Code</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="cart-summary">
+                                        <div class="cart-content">
+                                            <h1>Cart Summary</h1>
+                                            <p>Sub Total<span>₹{{t}}</span></p>
+                                            <p>Shipping Cost<span>₹{{s}}</span></p>
+                                            <h2>Grand Total<span>₹{{f}}</span></h2>
+                                        </div>
+                                        <style >
+                                            .l{
+                                                margin: 0px;
+                                            }
+                                        </style>
+                                        {%if cart%}
+                                        <div class="cart-btn">
+                                            
+                                            <a href="{%url 'checkout'%}"><button class="l">Checkout</button></a>
+                                        </div>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {%else%}
+        <style >
+            .l{
+                color: red
+            }
+        </style>
+        <div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="row" style="padding: 35px;">
+        <div class="col-md-12"><span class="l"><h4>To view page Login</h4></span>
+        <br>
+        <a href="{%url 'login'%}" class="btn btn-warning">Login</a></div>
+        </div>
+        </div>
+        {%endif%}
+        <!-- Cart End -->
+</body>
+{% endblock %}
+        
+        
+        
+       
+

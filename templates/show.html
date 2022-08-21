@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<!-- Cart Start -->
+        
+        <style >
+            .l{
+                color: red
+            }
+        </style>
+        <div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="row" style="padding: 35px;">
+        <div class="col-md-12"><span class="l"><h4>To view page Login</h4></span>
+        <br>
+        <a href="{%url 'login'%}" class="btn btn-warning">Login</a></div>
+        </div>
+        </div>
+        
+        <!-- Cart End -->
+</body>
+{% endblock %}
+        
+        
+        
+       
+

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                            
+                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
+                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>Address</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
+                            <a class="nav-link" href="{%url 'logout'%}"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Product</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Product Name</td>
+                                                <td>01 Jan 2020</td>
+                                                <td>$99</td>
+                                                <td>Approved</td>
+                                                <td><button class="btn">View</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Product Name</td>
+                                                <td>01 Jan 2020</td>
+                                                <td>$99</td>
+                                                <td>Approved</td>
+                                                <td><button class="btn">View</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Product Name</td>
+                                                <td>01 Jan 2020</td>
+                                                <td>$99</td>
+                                                <td>Approved</td>
+                                                <td><button class="btn">View</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                                <h4>Payment Method</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                                </p> 
+                            </div>
+                            
+                            <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                                <h4>Address</h4>
+                                <form action="{%url 'address'%}" method="POST">
+                                      {% csrf_token %}
+                                      {{form.non_field_errors}}
+                                <div class="row">
+                                     
+                                    <div class="col-md-6">
+                                        {{address.as_p}}
+
+                                        
+                                        
+                                        <input type="submit" value="Add" class="btn float-left login_btn">
+                                        
+                                    </div>
+                                    
+                                </div>
+                                </form>
+                                <br>
+                                
+                                {%for ad in b%}
+                                <h4>Address</h4>
+                                {{ad.address.label_tag}}{{ad.address}}
+                                <p></p>
+                                <a href="{%url 'edit_address' ad.id%}" class="btn">Delete</a>                               
+                                {%endfor%}
+                            </div>
+                            <style >
+                            .l{
+                                color: black; 
+                                margin: 10px;
+                                padding-top: 5px;
+                                padding-right: 8px;
+                                padding-bottom: 5px;
+                                padding-left: 8px;
+                                border-radius: 5px;
+                                background-color: #ffcccc;
+                            }
+                            
+                            </style>
+                            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                                <h4>Account Details:</h4>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>Name:{{name}}</h6></label> 
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label class="l"><h6>Username:{{username}}</h6></label>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>Email:{{email}}</h6></label> 
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>Mobile:{{s.mobile}}</h6></label> 
+                                    </div>
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>State:{{s.state}}</h6></label> 
+                                    </div>
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>City:{{s.city}}</h6></label> 
+                                    </div>
+                                    <div class="col-md-6">
+                                       <label class="l"><h6>Pincode:{{s.pincode}}</h6></label> 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+</body>
+{% endblock %}
+        
+        
+        
+        
+    

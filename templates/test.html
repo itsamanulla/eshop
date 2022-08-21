@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+	<div class="navbar-nav ml-auto">
+                            <button type="button" class="btn btn-success"  data-target="#mymodal" data-toggle="modal">Login</button>
+                            <div class="modal fade" id="mymodal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                            <div class="col-sm-10 mx-3 "><span class="label" style="color:red;"><h3>Login</h3></span></div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                        
+                            <div class="modal-body">
+               
+                         <form action="" method="POST">
+                             {% csrf_token %} 
+                             {{fm.non_field_errors}}
+
+                             {% for field in fm %}
+                               <div class="col-md-12">
+                                   <span class="label">{{field.label_tag}} </span> {{field}}
+                               </div>
+                             {% endfor %}
+                             
+                            
+                            
+                         <div class="col-md-12">
+                             <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="newaccount">
+                                 <label class="custom-control-label" for="newaccount"><span class="label">Keep me signed in</span></label>
+                             </div>
+                         </div>
+                         <div class="col-md-12">
+                            <input type="submit" value="Login" class="btn float-left login_btn">
+                        </div>
+                        </form>
+                    </div>
+</body>
+{% endblock %}

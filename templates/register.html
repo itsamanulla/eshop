@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<body>
+ <!-- Login Start -->
+        <div class="register">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 mx-auto shadow p-3 mb-5 bg-white rounded">    
+                        <div class="register-form">
+                            <div class="row">
+                               <style >
+                                   .errorlist{
+                                    list-style-type: none;
+                                    color: blue;
+                                    font-size: 10px
+                                    margin: 0;
+                                    padding: 0;
+                                   }
+                                   .l{
+                                    color: red
+                                   }
+                               </style>
+                               <div class="col-sm-12"><span class="l"><h3>Register</h3></span>
+                                <form action="{%url 'register'%}" method="POST">
+                                  {% csrf_token %}
+                                  {{form.non_field_errors}}
+                                   <div> <span class="errorlist">{{form.username.errors}}</span><span class="l">{{form.username.label}} {{form.username}}</span></div>
+                                   
+                                   <div> <span class="l">{{form.first_name.label}} {{form.first_name}}</span><span class="errorlist">{{form.first_name.errors}}</span></div>
+                                   
+                                   <div> <span class="l">{{form.last_name.label}} {{form.last_name}}</span><span class="errorlist">{{form.last_name.errors}}</span></div>
+                                   <span class="errorlist">{{error}}</span>
+                                   <div> <span class="l">{{form.email.label}} {{form.email}}</span><span class="errorlist">{{form.email.errors}}</span></div>
+                                  
+                                  
+                                  <div> <span class="l">{{form.password1.label}} {{form.password1}}</span><span class="errorlist">{{form.password1.errors}}</span></div>
+                                  
+                                  <div> <span class="l">{{form.password2.label}} {{form.password2}}</span><span class="errorlist">{{form.password2.errors}}</span></div>
+                                  <div> <span class="l">{{profile.as_p}}</span></div>
+                                <div class="form-group">
+                                   <input type="submit" value="Register" class="btn float-left login_btn">
+                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+</body>
+
+
+{% endblock %}
+        
+       
+        
+

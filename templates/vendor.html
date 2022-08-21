@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<body>
+ <!-- Login Start -->
+        <div class="register">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 bg-white rounded">    
+                        <div class="register-form">
+                            <div class="row">
+                               <style >
+                                   .errorlist{
+                                    list-style-type: none;
+                                    color: violet;
+                                    font-size: 10px
+                                    margin: 0px;
+                                    padding: 0px;
+                                   }
+                                   .l{
+                                    color: red;
+                                     margin: 0px;
+                                    padding: 0px;
+                                   }
+                               </style>
+                               <div class="col-sm-12">
+                                <form action="{%url 'vendor'%}" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  {{lm.non_field_errors}}
+                                  
+                                  {%for field in lm%}
+                                  <div> <span class="l">{{field.label_tag}} {{field}}</span><span class="errorlist">{{field.errors}}</span></div>
+                                 
+                                  {%endfor%}
+                                <div class="form-group">
+                                   <input type="submit" value="Add Product" class="btn float-left login_btn">
+                                </div>
+
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+</body>
+{% endblock %}
+        
+       
+        
+
